@@ -1,0 +1,690 @@
+/* ============================================================
+   Airbnb Madrid Dashboard — Stylesheet
+   Palette aligned with Deliverable 2:
+     RED_DARK  #7B241C   RED  #C0392B   RED_LIGHT #E8A49A
+     RED_PALE  #FDECEA   DGRAY #2C3E50  MGRAY #7F8C8D
+     LGRAY #F4F6F7        WHITE #FFFFFF
+   ============================================================ */
+
+/* ── Reset & base ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background-color: #F4F6F7;
+  color: #2C3E50;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+.dashboard-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.dashboard-header {
+  background: linear-gradient(135deg, #7B241C 0%, #C0392B 55%, #E74C3C 100%);
+  color: #FFFFFF;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.3px;
+  color: #FFFFFF;
+}
+
+.header-sub {
+  font-size: 13px;
+  margin: 0;
+  opacity: 0.82;
+  font-weight: 300;
+}
+
+/* ── Filter bar ─────────────────────────────────────────────── */
+.filter-bar {
+  background: #FFFFFF;
+  border-bottom: 2px solid #E8A49A;
+  padding: 12px 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+}
+
+.filter-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #7F8C8D;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.filter-control-wrap.is-locked {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+.filter-control-wrap.is-locked .filter-label {
+  color: #AAB7B8;
+}
+
+.filter-control-wrap.is-locked .Select-control,
+.filter-control-wrap.is-locked .form-check-input,
+.filter-control-wrap.is-locked .form-check-label {
+  cursor: not-allowed !important;
+}
+
+/* Dash dropdown overrides */
+.Select-control {
+  border-color: #E8A49A !important;
+  border-radius: 6px !important;
+}
+.Select-control:hover {
+  border-color: #C0392B !important;
+}
+.is-focused .Select-control {
+  border-color: #C0392B !important;
+  box-shadow: 0 0 0 2px rgba(192,57,43,0.15) !important;
+}
+.Select-multi-value-wrapper .Select-value {
+  background-color: #FDECEA !important;
+  border-color: #E8A49A !important;
+  color: #7B241C !important;
+  border-radius: 4px !important;
+}
+.Select-value-icon:hover {
+  background-color: #E8A49A !important;
+  color: #7B241C !important;
+}
+
+.Select.is-disabled .Select-control,
+.filter-control-wrap.is-locked .Select-control {
+  background: #F4F6F7 !important;
+  border-color: #D5D8DC !important;
+  box-shadow: none !important;
+}
+
+.Select.is-disabled .Select-arrow-zone {
+  opacity: 0.35;
+}
+
+/* ── KPI + Donut overview section ───────────────────────────── */
+.section-overview {
+  background: #FFFFFF;
+  border-bottom: 1px solid #ECF0F1;
+  padding: 24px 40px 18px 40px;
+  display: block;
+}
+
+.overview-content {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.kpi-row {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 14px;
+  width: 100%;
+}
+
+.kpi-card {
+  border: none !important;
+  border-radius: 8px !important;
+  background: #F9FAFB !important;
+  border-left: 4px solid #C0392B !important;
+  box-shadow: 0 1px 4px rgba(44,62,80,0.07) !important;
+  transition: box-shadow 0.18s, transform 0.18s;
+  cursor: default;
+}
+
+.kpi-card:hover {
+  box-shadow: 0 4px 16px rgba(192,57,43,0.18) !important;
+  transform: translateY(-2px);
+}
+
+#review-heatmap,
+#review-heatmap .js-plotly-plot,
+#review-heatmap .plotly,
+#review-heatmap .main-svg,
+#review-heatmap .draglayer,
+#review-heatmap .nsewdrag,
+#review-heatmap .heatmaplayer,
+#review-heatmap .hoverlayer {
+  cursor: default !important;
+}
+
+.kpi-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #7F8C8D;
+  margin-bottom: 6px;
+}
+
+.kpi-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #C0392B;
+  margin-bottom: 3px;
+  line-height: 1.1;
+}
+
+.kpi-sub {
+  font-size: 10px;
+  color: #BDC3C7;
+  margin: 0;
+}
+
+.donut-wrapper {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Custom clickable legend below the donut */
+.custom-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 8px;
+  margin-top: 8px;
+  padding: 0 4px;
+  width: 100%;
+}
+
+.custom-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  background: #FFFFFF;
+  border: 1px solid #ECF0F1;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 12px;
+  color: #2C3E50;
+  font-family: inherit;
+  font-weight: 500;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  user-select: none;
+}
+
+.custom-legend-item:hover {
+  background: #FDECEA;
+  border-color: #E8A49A;
+}
+
+.custom-legend-item:active {
+  transform: scale(0.97);
+}
+
+.legend-swatch {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.legend-label {
+  white-space: nowrap;
+}
+
+.custom-legend.is-locked {
+  opacity: 0.62;
+}
+
+.custom-legend-item:disabled,
+.custom-legend.is-locked .custom-legend-item {
+  color: #AAB7B8;
+  background: #F4F6F7;
+  border-color: #D5D8DC;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.custom-legend-item:disabled:hover,
+.custom-legend.is-locked .custom-legend-item:hover {
+  background: #F4F6F7;
+  border-color: #D5D8DC;
+}
+
+.filterable-graph:not(.is-locked) .barlayer,
+.filterable-graph:not(.is-locked) .barlayer .point,
+.filterable-graph:not(.is-locked) .pielayer,
+.filterable-graph:not(.is-locked) .slicelayer,
+.filterable-graph:not(.is-locked) .slice,
+.filterable-graph:not(.is-locked) .surface {
+  cursor: pointer !important;
+}
+
+.filterable-graph.is-locked {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.filterable-graph.is-locked .js-plotly-plot,
+.filterable-graph.is-locked .plotly {
+  cursor: not-allowed !important;
+}
+
+.filterable-graph.is-locked .nsewdrag,
+.filterable-graph.is-locked .draglayer,
+.filterable-graph.is-locked .pielayer,
+.filterable-graph.is-locked .slicelayer,
+.filterable-graph.is-locked .barlayer {
+  pointer-events: none;
+}
+
+/* ── Dashboard sections ─────────────────────────────────────── */
+.dashboard-section {
+  background: #FFFFFF;
+  padding: 24px 40px 16px 40px;
+  margin-top: 10px;
+  border-top: 1px solid #ECF0F1;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2C3E50;
+  margin: 0 0 6px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #C0392B;
+  display: inline-block;
+  letter-spacing: 0.2px;
+}
+
+/* ── Radio items (activity metric selector) ─────────────────── */
+.dash-radio-items label {
+  font-size: 13px !important;
+  color: #2C3E50 !important;
+}
+
+input[type="radio"]:checked {
+  accent-color: #C0392B;
+}
+
+/* ── Bootstrap switch override ──────────────────────────────── */
+.form-check-input:checked {
+  background-color: #C0392B !important;
+  border-color: #C0392B !important;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+.dashboard-footer {
+  background: #2C3E50;
+  color: #7F8C8D;
+  text-align: center;
+  padding: 14px 40px;
+  margin-top: 10px;
+}
+
+.footer-text {
+  font-size: 11px;
+  margin: 3px 0;
+  line-height: 1.5;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 992px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .kpi-grid         { grid-template-columns: 1fr 1fr; }
+  .overview-content { flex-direction: column; }
+  .donut-wrapper    { width: 100%; }
+  .filter-bar       { flex-direction: column; align-items: flex-start; padding: 12px 20px; }
+  .dashboard-section, .section-overview { padding: 16px 20px; }
+  .dashboard-header { padding: 18px 20px; }
+  .kpi-value        { font-size: 22px; }
+}
+
+/* ── Top hosts table ────────────────────────────────────────── */
+.subsection-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: #7F8C8D;
+  margin: 0 0 10px 2px;
+}
+
+.top-hosts-table-wrapper {
+  display: inline-block;       /* shrink-wrap to the table's actual width */
+  background: #FFFFFF;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(44, 62, 80, 0.08);
+  border: 1px solid #ECF0F1;
+  max-width: 100%;
+}
+
+/* ── KPI sparklines ────────────────────────────────────────── */
+/* Single horizontal progress bar */
+.kpi-spark-bar {
+  margin-top: 10px;
+  height: 6px;
+  width: 100%;
+  background: #ECF0F1;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.kpi-spark-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.35s ease;
+}
+
+/* Horizontal stacked bar (multiple colored segments) */
+.kpi-spark-stack {
+  margin-top: 10px;
+  display: flex;
+  height: 6px;
+  width: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #ECF0F1;
+}
+.kpi-spark-seg {
+  height: 100%;
+  transition: width 0.35s ease;
+}
+
+/* Gradient scale with marker (used for median price) */
+.kpi-spark-scale {
+  margin-top: 10px;
+  position: relative;
+  height: 8px;
+  width: 100%;
+  border-radius: 3px;
+}
+.kpi-spark-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, #FDECEA 0%, #E8A49A 50%, #C0392B 100%);
+  border-radius: 3px;
+  opacity: 0.85;
+}
+.kpi-spark-marker {
+  position: absolute;
+  top: -3px;
+  width: 3px;
+  height: 14px;
+  background: #2C3E50;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  transition: left 0.35s ease;
+  box-shadow: 0 0 0 2px #FFFFFF;
+}
+
+/* ── Last-review heatmap wrapper ───────────────────────────── */
+.heatmap-wrapper {
+  width: 385px;
+  min-width: 385px;
+  max-width: 385px;
+  height: 329px;
+  min-height: 329px;
+  max-height: 329px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: 385px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(2px);
+}
+
+.heatmap-wrapper #review-heatmap,
+.heatmap-wrapper .dash-graph,
+.heatmap-wrapper .js-plotly-plot,
+.heatmap-wrapper .plot-container,
+.heatmap-wrapper .svg-container {
+  width: 385px !important;
+  min-width: 385px !important;
+  max-width: 385px !important;
+  height: 329px !important;
+  min-height: 329px !important;
+  max-height: 329px !important;
+}
+
+/* ── Map: iOS-style sliding-pill segmented control ─────────── */
+.map-segmented-wrap {
+  display: flex;
+  justify-content: flex-start;
+  margin: 4px 0 14px 0;
+}
+
+/* Outer track: subtle iOS-style gray, rounded, anchors the absolute pill */
+.map-segmented {
+  position: relative;
+  display: inline-block;
+  background: rgba(118, 118, 128, 0.10);     /* iOS segmented-control track */
+  padding: 4px;
+  border-radius: 12px;
+  border: none;
+}
+
+/* Sliding pill — the white "glass" highlight that follows the active tab.
+   transform/width are set by the clientside callback; CSS animates them. */
+.map-seg-pill {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: 0;
+  background: #FFFFFF;
+  border-radius: 8px;
+  box-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.04),
+    0 3px 10px rgba(0, 0, 0, 0.06);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;                                /* hidden until JS positions it */
+  transform: translateX(0);
+  transition:
+    transform 0.36s cubic-bezier(0.32, 0.72, 0, 1),
+    width     0.36s cubic-bezier(0.32, 0.72, 0, 1),
+    opacity   0.20s ease;
+}
+
+/* The radio group itself — a flex row of form-check pairs */
+.map-segmented-radio {
+  display: inline-flex;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+}
+
+.map-segmented .form-check {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.map-segmented input[type="radio"].btn-check {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.map-seg-btn {
+  display: inline-block;
+  padding: 7px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #5F6368;
+  background: transparent;                   /* the pill is the bg */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  z-index: 2;                                /* above the pill */
+  transition: color 0.20s ease;
+}
+
+.map-seg-btn:hover {
+  color: #2C3E50;
+}
+
+.map-seg-btn.active {
+  color: #C0392B;                            /* pill below provides the bg */
+}
+
+/* Tap feedback — slight press */
+.map-seg-btn:active {
+  transform: scale(0.98);
+}
+
+
+/* Map graph sits cleanly within the section; rounded corners feel modern */
+.unified-map .js-plotly-plot,
+.unified-map > div {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Plotly modebar: subtle by default, full opacity on hover so buttons
+   never look "dead" while still staying out of the way. */
+.modebar {
+  background: rgba(255, 255, 255, 0.0) !important;
+  opacity: 0.6 !important;
+  transition: opacity 0.18s ease;
+  top: 10px !important;       /* a small breathing gap from the top edge */
+  right: 8px !important;
+}
+.modebar:hover {
+  opacity: 1 !important;
+}
+.modebar-btn {
+  cursor: pointer;
+}
+.modebar-btn path {
+  fill: #5F6368 !important;
+}
+.modebar-btn:hover path,
+.modebar-btn.active path {
+  fill: #C0392B !important;
+}
+
+/* ── Top-hosts header (title + filter indicator + clear button) ─── */
+.top-hosts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.host-filter-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* "Filtered by host: 12345" pill — appears only when a host is selected */
+.host-filter-pill {
+  display: none;
+  padding: 4px 10px;
+  background: #FDECEA;
+  color: #7B241C;
+  border: 1px solid #E8A49A;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+}
+.host-filter-pill.active {
+  display: inline-block;
+}
+
+.clear-host-btn {
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid #ECF0F1;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  color: #7F8C8D;
+  font-family: inherit;
+  transition: border-color 0.15s ease, color 0.15s ease,
+              background 0.15s ease;
+}
+.clear-host-btn:hover {
+  border-color: #C0392B;
+  color: #C0392B;
+  background: #FDECEA;
+}
+
+/* Make whole DataTable rows look clickable, override Dash defaults a bit */
+.top-hosts-table-wrapper .dash-table-container .dash-spreadsheet-container {
+  border: none;
+}
+.top-hosts-table-wrapper .dash-spreadsheet tr {
+  cursor: pointer;
+}
+
+/* ── DataTable: hide row-selectable radio column, click-anywhere rows ── */
+/* Hide the radio button cells and header */
+.top-hosts-table-wrapper td.dash-select-cell,
+.top-hosts-table-wrapper th.dash-select-header,
+.top-hosts-table-wrapper td.dash-select-cell input,
+.top-hosts-table-wrapper th.dash-select-header input {
+  display: none !important;
+}
+
+/* Whole-row click affordance */
+.top-hosts-table-wrapper .dash-spreadsheet td {
+  cursor: pointer;
+}
+
+/* Keep Dash's focused/selected cell state from changing the table grid. */
+.top-hosts-table-wrapper .dash-spreadsheet td.focused,
+.top-hosts-table-wrapper .dash-spreadsheet td.cell--selected,
+.top-hosts-table-wrapper .dash-spreadsheet td.focused.cell--selected {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-top: 1px solid #F2F3F5 !important;
+  border-bottom: 1px solid #F2F3F5 !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.top-hosts-table-wrapper .dash-spreadsheet tbody tr:first-child td.focused,
+.top-hosts-table-wrapper .dash-spreadsheet tbody tr:first-child td.cell--selected,
+.top-hosts-table-wrapper .dash-spreadsheet tbody tr:first-child td.focused.cell--selected {
+  border-top: 1px solid #F2F3F5 !important;
+}
