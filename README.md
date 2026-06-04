@@ -88,6 +88,15 @@ Then open:
 http://127.0.0.1:8050
 ```
 
+You can also access the dashboard here:
+
+```text
+https://airbnb-dashboard-jhgl.onrender.com/
+```
+
+This is a free Render deployment, so it may run a bit slowly because the
+dashboard includes several interactive filters and linked charts.
+
 ### Run with Docker
 
 Make sure Docker Desktop is running, then build the image from the project
