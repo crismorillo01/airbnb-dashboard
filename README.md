@@ -42,6 +42,37 @@ the dashboard stays consistent across all filter combinations.
   host type, listing count, reviews in the last 12 months, and activity rate
 - Dynamic hover label colors for readability
 
+## Filters and How to Use Them
+
+The dashboard is designed for cross-filtering, so most controls can be used
+together and the charts update in sync with one another.
+
+- District filter: use the searchable multi-select dropdown to limit the
+  dashboard to one or more Madrid districts. Remove a district from the
+  selection, or clear the field, to go back to the full city view.
+- Recent activity only: turn on the switch to keep only listings that were
+  active in the last 12 months. This also removes the "Activity rate" map
+  layer, since that metric is no longer meaningful when every listing in view
+  is active.
+- Price histogram: click a price bin to start a range selection. Keep clicking
+  adjacent bins to expand the range, or click one of the edge bins to shrink
+  it again. Non-adjacent clicks are ignored so the selection always stays
+  contiguous.
+- Accommodation donut: click a slice or its matching legend item to include or
+  exclude a room type. This works as a multi-select filter, so you can compare
+  several accommodation types at once.
+- Host type bar chart: click one or more bars to filter by host category. The
+  selection behaves like the room-type filter, so bars can be toggled on and
+  off.
+- Top 10 hosts table: click any host row to filter the whole dashboard to that
+  host. While a host is selected, the other global filters and chart controls
+  are locked to preserve the current context. Use the "× Clear" button to
+  return to normal filtering.
+
+You can combine the district, activity, price, room type, and host type
+filters freely. The map and KPIs always reflect the current selection, and the
+host table stays visible so you can switch to another host at any time.
+
 ## How to Run
 
 From the `airbnb-dashboard` folder:
