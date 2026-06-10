@@ -1257,7 +1257,7 @@ app.layout = html.Div([
             className="footer-text",
         ),
         html.P(
-            "Cristina Morillo Leal · Vo Thuy Trang · Ketevan Romanishvili · May 2026",
+            "Cristina Morillo Leal · Vo Thuy Trang · Ketevan Romanishvili · Jun 2026",
             className="footer-text",
         ),
     ], className="dashboard-footer"),
